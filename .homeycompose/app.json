@@ -29,5 +29,6 @@
     "url": "https://github.com/remne/homey-wimbib/issues"
   },
   "source": "https://github.com/remne/homey-wimbib",
-  "homepage": "https://remne.tech"  
+  "homepage": "https://remne.tech",
+  "brandColor": "#0d47a2"
 }
