@@ -1,0 +1,47 @@
+<script type="application/javascript">
+
+    function onAddButtonClick()
+    {
+        wimbibAddress = document.getElementById('wimbib_address').value;
+
+        Homey.showLoadingOverlay();
+
+        Homey.emit("test_connection", { wimbibAddress: wimbibAddress }).then(function (result) {
+          console.log(result);
+
+          Homey.hideLoadingOverlay();
+
+          if(result == 'ERROR')
+          {
+            Homey.alert("Unable to connect", "error");
+          } else {
+            addDevice(wimbibAddress, result.mac_address);
+          }
+        });
+    }
+
+    function addDevice(wimbibAddress, deviceId)
+    {
+        Homey.createDevice({
+            name: "wimbib",
+            data: {
+                id: deviceId,
+            },
+            settings: {
+                wimbib_address: wimbibAddress,
+            },
+        })
+        .then(function (result) {
+            Homey.done();
+        })
+        .catch(function (error) {
+            Homey.alert(err);
+        });
+    }
+    
+  </script>
+
+
+<label for="wimbib_address">wimbib ip address or hostname:</label>
+<input name="wimbib_address" id="wimbib_address" placeholder="wimbib.local" type="text"/>
+<button onclick="onAddButtonClick()">Add</button>

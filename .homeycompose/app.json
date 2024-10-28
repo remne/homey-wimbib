@@ -1,0 +1,33 @@
+{
+  "id": "tech.remne.wimbib",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "WIMBIB"
+  },
+  "description": {
+    "en": "RemneTech WIMBIB - Wireless MBus Interface Bridge"
+  },
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Andreas Remnehed",
+    "email": "remnehed@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/remne/homey-wimbib/issues"
+  },
+  "source": "https://github.com/remne/homey-wimbib",
+  "homepage": "https://remne.tech"  
+}
