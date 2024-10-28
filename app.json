@@ -38,37 +38,8 @@
         "en": "wimbib"
       },
       "class": "sensor",
-      "capabilities": [
-        "alarm_water",
-        "measure_water",
-        "meter_water"
-      ],
-      "capabilitiesOptions": {
-        "alarm_water": {
-          "title": {
-            "en": "Water Alarm"
-          },
-          "description": {
-            "en": "Get notified when water alarms triggered"
-          }
-        },
-        "measure_water": {
-          "title": {
-            "en": "Water Measure"
-          },
-          "description": {
-            "en": "Measure the amount of water"
-          }
-        },
-        "meter_water": {
-          "title": {
-            "en": "Water Meter"
-          },
-          "description": {
-            "en": "Monitor your water consumption"
-          }
-        }
-      },
+      "capabilities": [],
+      "capabilitiesOptions": {},
       "discovery": "wimbib",
       "platforms": [
         "local"
