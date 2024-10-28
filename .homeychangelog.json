@@ -1,5 +1,8 @@
 {
   "1.0.0": {
     "en": "First test app"
+  },
+  "1.0.1": {
+    "en": "Dynamic sensor capabilities for meter metrics"
   }
 }
