@@ -11,7 +11,7 @@
     "en": "WIMBIB"
   },
   "description": {
-    "en": "RemneTech WIMBIB - Wireless MBus Interface Bridge"
+    "en": "Wireless MBus Interface Bridge"
   },
   "category": [
     "energy"
@@ -23,8 +23,8 @@
     "xlarge": "/assets/images/xlarge.png"
   },
   "author": {
-    "name": "Andreas Remnehed",
-    "email": "remnehed@gmail.com"
+    "name": "Remne Technologies AB",
+    "email": "hello@remne.tech"
   },
   "bugs": {
     "url": "https://github.com/remne/homey-wimbib/issues"

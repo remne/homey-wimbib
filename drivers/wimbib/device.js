@@ -44,6 +44,7 @@ module.exports = class WimbibDevice extends Homey.Device {
       responseBody = response.body;
     } catch (error) {
       console.error('Error caught while getting meterData', error);
+      return;
     }
     const meterData = JSON.parse(responseBody);
     if (meterData == null) {
