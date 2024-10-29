@@ -1,3 +1,0 @@
-# WIMBIB
-
-RemneTech WIMBIB
