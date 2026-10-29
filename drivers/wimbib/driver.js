@@ -1,6 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
+const got = require('got');
+
 
 module.exports = class WimbibDriver extends Homey.Driver {
 
@@ -25,6 +27,11 @@ module.exports = class WimbibDriver extends Homey.Driver {
       this.log('got discovery result:', discoveryResult);
       this.handleDiscoveryResult(discoveryResult);
     });
+
+    // Flow cards are defined in driver.flow.compose.json. The device triggers are fired
+    // from WimbibDevice, Homey picks the flows that belong to that device.
+    this.homey.flow.getConditionCard('measure_water.actual_above')
+      .registerRunListener(async args => args.device.getCapabilityValue('measure_water') > args.flow);
   }
 
   handleDiscoveryResult(discoveryResult) {
@@ -55,7 +62,7 @@ module.exports = class WimbibDriver extends Homey.Driver {
 
       try {
         this.address = data.wimbibAddress;
-        const deviceInfo = getDeviceInfo();
+        const deviceInfo = await this.getDeviceInfo();
         return deviceInfo;
       } catch (error) {
         this.error(error);
@@ -83,31 +90,5 @@ module.exports = class WimbibDriver extends Homey.Driver {
     const response = await got(url);
     const deviceInfo = JSON.parse(response.body);
     return deviceInfo;
-  }
-
-
-  async readMeterData() {
-    const url = `http://${this.address}/meterData`;
-    console.log('fetching data from:', url);
-
-    let responseBody = '';
-
-    try {
-      const response = await got(url);
-      responseBody = response.body;
-    } catch (error) {
-      console.error('Error caught while getting meterData', error);
-    }
-
-    const meterData = JSON.parse(responseBody);
-
-    if (meterData == null) {
-      console.error(`Unable to parse meterData json from body: ${responseBody}`);
-    }
-
-    const retval = {
-    };
-
-    return retval;
   }
 };

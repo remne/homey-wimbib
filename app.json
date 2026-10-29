@@ -2,7 +2,7 @@
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "tech.remne.wimbib",
   "version": "1.0.3",
-  "compatibility": ">=5.0.0",
+  "compatibility": ">=12.1.0",
   "sdk": 3,
   "platforms": [
     "local"
@@ -32,6 +32,136 @@
   "source": "https://github.com/remne/homey-wimbib",
   "homepage": "https://remne.tech",
   "brandColor": "#0d47a2",
+  "flow": {
+    "triggers": [
+      {
+        "id": "alarm_water.burst_true",
+        "highlight": true,
+        "title": {
+          "en": "Burst alarm",
+          "sv": "Spricklarm"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          }
+        ]
+      },
+      {
+        "id": "alarm_water.dry_true",
+        "highlight": true,
+        "title": {
+          "en": "Dry alarm",
+          "sv": "Torrlarm"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          }
+        ]
+      },
+      {
+        "id": "alarm_water.reverse_true",
+        "highlight": true,
+        "title": {
+          "en": "Reverse alarm",
+          "sv": "Backflödeslarm"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          }
+        ]
+      },
+      {
+        "id": "meter_water.target_changed",
+        "highlight": true,
+        "title": {
+          "en": "Target volume changed",
+          "sv": "Målvolym ändrad"
+        },
+        "tokens": [
+          {
+            "name": "meter_water.target",
+            "title": {
+              "en": "Target volume",
+              "sv": "Målvolym"
+            },
+            "type": "number",
+            "example": 25
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          }
+        ]
+      },
+      {
+        "id": "measure_water.actual_changed",
+        "title": {
+          "en": "Actual flow changed",
+          "sv": "Aktuellt flöde ändrat"
+        },
+        "tokens": [
+          {
+            "name": "measure_water",
+            "title": {
+              "en": "Actual flow",
+              "sv": "Aktuellt flöde"
+            },
+            "type": "number",
+            "example": 12.5
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "measure_water.actual_above",
+        "title": {
+          "en": "Actual flow !{{is|is not}} above",
+          "sv": "Aktuellt flöde !{{är|är inte}} över"
+        },
+        "titleFormatted": {
+          "en": "Actual flow !{{is|is not}} above [[flow]] L/min",
+          "sv": "Aktuellt flöde !{{är|är inte}} över [[flow]] L/min"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wimbib"
+          },
+          {
+            "type": "number",
+            "name": "flow",
+            "min": 0,
+            "step": 0.1,
+            "placeholder": {
+              "en": "L/min",
+              "sv": "L/min"
+            }
+          }
+        ]
+      }
+    ]
+  },
   "drivers": [
     {
       "name": {
@@ -40,6 +170,9 @@
       "class": "sensor",
       "capabilities": [],
       "capabilitiesOptions": {},
+      "energy": {
+        "cumulative": true
+      },
       "discovery": "wimbib",
       "platforms": [
         "local"
@@ -77,6 +210,23 @@
       "id": "wimbib"
     }
   ],
+  "widgets": {
+    "water-meter": {
+      "name": {
+        "en": "Water meter",
+        "sv": "Vattenmätare"
+      },
+      "height": 360,
+      "settings": [],
+      "api": {
+        "getData": {
+          "method": "GET",
+          "path": "/"
+        }
+      },
+      "id": "water-meter"
+    }
+  },
   "discovery": {
     "wimbib": {
       "type": "mdns-sd",
